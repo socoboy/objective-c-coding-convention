@@ -18,6 +18,7 @@ This guidelines references from Open-sources projects:
 * [Variables](#variables)
 * [Property Attributes](#property-attributes)
 * [Private Properties](#private-properties)
+* [Types](#types)
 * [Literals](#literals)
 * [Constants](#constants)
 * [Enumerated Types](#enumerated-types)
@@ -25,6 +26,7 @@ This guidelines references from Open-sources projects:
 * [Booleans](#booleans)
 * [Conditionals](#conditionals)
   * [Ternary Operator](#ternary-operator)
+* [Operators](#operators)
 * [Init Methods](#init-methods)
 * [Class Constructor Methods](#class-constructor-methods)
 * [CGRect Functions](#cgrect-functions)
@@ -377,6 +379,12 @@ Private properties should be declared in class extensions (anonymous categories)
 @end
 ```
 
+##Types
+
+`NSInteger` and `NSUInteger` should be used instead of `int`, `long`, etc per Apple's best practices and 64-bit safety. `CGFloat` or `double` **MUST** be used instead `float` for the same reasons. This future proofs code for 64-bit platforms.
+
+All Apple types should be used over primitive ones. For example, if you are working with time intervals, use `NSTimeInterval` instead of `double` even though it is synonymous. This is considered best practice and makes for clearer code.
+
 ## Literals
 
 `NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values can not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
@@ -621,6 +629,18 @@ result = isHorizontal ? x : y;
 result = a > b ? x = c > d ? c : d : y;
 ```
 
+##Operators
+
+The `++`, `--`, etc are preferred to be after the variable instead of before to be consistent with other operators. Operators separated should **always** be surrounded by spaces unless there is only one operand.
+
+```objective-c
+NSString *foo = @"bar";
+NSInteger answer = 42;
+answer += 9;
+answer++;
+answer = 40 + 2;
+```
+
 ## Init Methods
 
 Init methods should follow the convention provided by Apple's generated code template.  A return type of 'instancetype' should also be used instead of 'id'.
@@ -782,6 +802,12 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 #import "NYTButton.h"
 #import "NYTUserView.h"
 ```
+
+**Always** use `@class` whenever possible in header files instead of `#import` since it has a slight compile time performance boost.
+
+From the [Objective-C Programming Guide](http://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjectiveC/ObjC.pdf) (Page 38):
+
+> The @class directive minimizes the amount of code seen by the compiler and linker, and is therefore the simplest way to give a forward declaration of a class name. Being simple, it avoids potential problems that may come with importing files that import still other files. For example, if one class declares a statically typed instance variable of another class, and their two interface files import each other, neither class may compile correctly.
 
 ## Protocols
 
