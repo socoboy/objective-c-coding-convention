@@ -4,6 +4,7 @@
 This guidelines references from Open-sources projects:
 * [Raywenderic Coding style guidelines](https://github.com/raywenderlich/objective-c-style-guide)
 * [NYTimes Style guide](https://github.com/NYTimes/objective-c-style-guide)
+* [Google Objective-C Style Guide](https://google.github.io/styleguide/objcguide.xml)
   
 ## Table of Contents
 * [Code Organization](#code-organization)
