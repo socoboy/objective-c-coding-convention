@@ -786,6 +786,8 @@ The physical files **MUST** be kept in sync with the Xcode project files in orde
 
 When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
 
+Xcode projects **MUST** contain .gitignore file. Could use [.gitignore](https://github.com/github/gitignore/blob/master/Objective-C.gitignore) as a sample.
+
 ## Imports
 
 If there is more than one import statement, statements **MUST** be grouped [together](http://ashfurrow.com/blog/structuring-modern-objective-c). Groups MAY be commented.
