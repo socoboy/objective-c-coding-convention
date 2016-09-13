@@ -7,9 +7,8 @@ This guidelines references from Open-sources projects:
 * [Google Objective-C Style Guide](https://google.github.io/styleguide/objcguide.xml)
   
 ## Table of Contents
-* [Code Organization](#code-organization)
 * [Spacing](#spacing)
-* [Line Length](#line-length)
+* [Code Organization](#code-organization)
 * [Dot Notation Syntax](#dot-notation-syntax)
 * [Comments](#comments)
 * [Naming](#naming)
@@ -39,6 +38,121 @@ This guidelines references from Open-sources projects:
 * [Imports](#imports)
 * [Protocols](#protocols)
 * [Image Naming](#image-naming)
+
+## Spacing
+
+* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+* **Must** have exaclty 1 space between `if` and braces 
+
+**Preferred:**
+```objc
+if (user.isHappy) {
+    //Do something
+} else {
+    //Do something else
+}
+
+- (IBAction)outletAction:(id)sender {
+    // sample action
+}
+```
+
+**Not Preferred:**
+```objc
+if (user.isHappy)
+{
+    //Do something
+}
+else {
+    //Do something else
+}
+
+if(True){
+    //Do something
+}
+
+- (IBAction)outletAction:(id)sender
+{
+    // sample action
+}
+```
+
+* **DO NOT** add spaces between method return type and method name
+* **DO NOT** add spaces between type and braces
+* **DO NOT** add spaces between `*` and variable name
+* Space between type and `*` **MUST exactly** 1 space
+* Space between operators (`+`, `-`, `>=`, ...) **MUST exaclty** 1 space
+* There **SHOULD NOT** be a space between the type identifier and the name of the protocol encased in angle brackets, applies to instance variables, and method declarations
+* There **Must** have exaclty 1 space between protocol encased in angle brackets and super class (class declaration) or super protocol (protocol declaration)
+* **Must** have exactly 1 space between `-` and `(return_type)`
+
+**Preferred:**
+```objc
+- (void)setText:(NSString *)text {
+    UILabel *label.text = text;
+    id<AnProtocolName> aVariable = nil;
+}
+
+@protocol AnProtocolName <ASuperProtocol>
+
+@end
+
+@interface MyProtocoledClass : NSObject <NSWindowDelegate>
+
+@property (nonatomic, week) id<AnProtocolName> aVariable;
+
+@end
+
+
+```
+
+**Not Preferred:**
+```objc
+-(void) setText:( NSString * ) text {
+    UILabel * label.text=text;
+    UILabel* label2.text=text;
+    id<AnProtocolName> aVariable = nil;
+}
+
+@protocol AnProtocolName<ASuperProtocol>
+
+@end
+
+@interface MyProtocoledClass : NSObject<NSWindowDelegate>
+
+@property (nonatomic, week) id <AnProtocolName> aVariable;
+
+@end
+```
+
+* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
+* Prefer using auto-synthesis. But if necessary, `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
+* Colon-aligning method invocation should often be avoided. There are cases where a method signature may have >= 3 colons and colon-aligning makes the code more readable. Please do **NOT** however colon align methods containing blocks because Xcode's indenting makes it illegible.
+* Code inside blocks **MUST** be indented four spaces
+
+**Preferred:**
+
+```objc
+// blocks are easily readable
+[UIView animateWithDuration:1.0 animations:^{
+    // something
+} completion:^(BOOL finished) {
+    // something
+}];
+```
+
+**Not Preferred:**
+
+```objc
+// colon-aligning makes the block indentation hard to read
+[UIView animateWithDuration:1.0
+                 animations:^{
+                   // something
+                 }
+                 completion:^(BOOL finished) {
+                   // something
+                 }];
+```
 
 ## Code Organization
 
@@ -83,66 +197,6 @@ Use `#pragma mark -` to categorize methods in functional groupings and protocol/
 
 - (NSString *)description {}
 ```
-
-## Spacing
-
-* Indent using 2 spaces (this conserves space in print and makes line wrapping less likely). Never indent with tabs. Be sure to set this preference in Xcode.
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
-
-**Preferred:**
-```objc
-if (user.isHappy) {
-  //Do something
-} else {
-  //Do something else
-}
-```
-
-**Not Preferred:**
-```objc
-if (user.isHappy)
-{
-    //Do something
-}
-else {
-    //Do something else
-}
-```
-
-* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
-* Prefer using auto-synthesis. But if necessary, `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
-* Colon-aligning method invocation should often be avoided.  There are cases where a method signature may have >= 3 colons and colon-aligning makes the code more readable. Please do **NOT** however colon align methods containing blocks because Xcode's indenting makes it illegible.
-* Code inside blocks **MUST** be indented four spaces
-
-**Preferred:**
-
-```objc
-// blocks are easily readable
-[UIView animateWithDuration:1.0 animations:^{
-    // something
-} completion:^(BOOL finished) {
-    // something
-}];
-```
-
-**Not Preferred:**
-
-```objc
-// colon-aligning makes the block indentation hard to read
-[UIView animateWithDuration:1.0
-                 animations:^{
-                   // something
-                 }
-                 completion:^(BOOL finished) {
-                   // something
-                 }];
-```
-
-## Line Length
-
-The maximum line length for Objective-C and Objective-C++ files is 100 columns.
-
-You can make violations easier to spot by enabling Preferences > Text Editing > Page guide at column: 100 in Xcode
 
 ## Dot Notation Syntax
 
